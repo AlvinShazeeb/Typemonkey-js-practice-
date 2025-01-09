@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ghuma vai</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <style>
+        *{
+            /* border: solid black 1px; */
+        }
+        body {
+            margin: 0;
+            background-color: #434c52;
+            font-family: 'Roboto Mono';
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        #keyboard {
+            display: grid;
+            /* grid-template-columns: repeat(10, 1fr);
+            grid-template-rows: repeat(3, 1fr); */
+            grid-gap: 5px;
+            padding: 10px;
+            width: 400px;
+        }
+
+        .key {
+            /* background-color: #333; */
+            color: rgb(168, 201, 209);
+            border: 1px rgb(168, 201, 209) solid;
+            font-size: 1.2rem;
+            padding: 20px;
+            /* border: none; */
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.7s ease;
+            cursor: default;
+        }
+
+        .key.active {
+            background-color: rgba(0, 204, 255, 1);
+            color: white;
+            border: 1px rgba(122, 255, 255, 0.9) solid;
+        }
+
+        .K_container{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            left: -7%;
+        }
+    </style>
+</head>
+<body>
+<div class="K_container">
+<div id="keyboard"></div>
+<!-- <div id="spacebar" class="key">
+    space
+</div> -->
+</div>
+<script>
+  const keyboardDiv = document.getElementById('keyboard');
+  const keyMap = {};
+
+  const keyboardLayout = [
+      "1234556789",
+      "qwertyuiop",
+      "asdfghjkl;",
+      "zxcvbnm,./"
+  ];
+
+  keyboardLayout.forEach(row => {
+      row.split('').forEach(char => { 
+          const keyDiv = document.createElement('div');
+          keyDiv.classList.add('key');
+          keyDiv.textContent = char;
+          keyboardDiv.appendChild(keyDiv);
+          keyMap[char] = keyDiv;  
+      });
+  });
+
+  document.addEventListener('keydown', (event) => {
+      const key = event.key.toLowerCase();
+      if (keyMap[key]) {
+          keyMap[key].classList.add('active');
+      }
+  });
+
+  document.addEventListener('keyup', (event) => {
+      const key = event.key.toLowerCase();
+      if (keyMap[key]) {
+          keyMap[key].classList.remove('active');
+      }
+  });
+
+
+</script>
+
+</body>
+</html>
